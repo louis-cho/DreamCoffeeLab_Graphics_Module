@@ -10,7 +10,7 @@ data.renderer.camera.far = 10000;
 
 data.renderer.camera.lookAt = [0, 0, 0];
 
-data.renderer.camera.position = [100, 100, 100];
+data.renderer.camera.position = [10, 10, 10];
 
 data.renderer.directional = {};
 data.renderer.directional.color = 0xffffff;
@@ -28,3 +28,8 @@ data.renderer.background.color = 0x0aaaaa;
 
 data.objectManager = {};
 data.objectManager.brandId = 1;
+
+data.tileManager = {};
+data.tileManager.tile = {};
+data.tileManager.tile.size = [0.92, 0.97, 0.92];
+data.tileManager.tile.color = 0x555555;

@@ -37,7 +37,7 @@ export default class SimRenderer {
     // this.createStats();
     this.createLight();
     this.createBackground();
-    this.createCube();
+    // this.createCube();
     this.createControls();
 
     this._div.appendChild(SimRenderer.I._renderer.domElement);
@@ -146,8 +146,10 @@ export default class SimRenderer {
   updateRendererSize() {
     SimRenderer.I._renderer.domElement.style.width = window.innerWidth + "px";
     SimRenderer.I._renderer.domElement.style.height = window.innerHeight + "px";
+
     const width = SimRenderer.I._renderer.domElement.clientWidth;
     const height = SimRenderer.I._renderer.domElement.clientHeight;
+
     console.log(width + "," + height);
 
     // 카메라 비율 업데이트

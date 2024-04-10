@@ -30,7 +30,8 @@ export class SimApp {
     // asset manager 로드하기
     this._assetManager = new SimAssetManager();
     // tile manager 로드하기
-    this._tileManager = new SimTileManager();
+    this._tileManager = new SimTileManager(3, 10);
+    this.initTileManager();
 
     // object manager 로드하기
     this._objectManager = new SimObjectManager(
@@ -43,6 +44,15 @@ export class SimApp {
     // menu 로드하기
 
     // request 설정
+  }
+
+  initTileManager() {
+    let tiles = this._tileManager._tiles;
+    for (let i = 0; i < tiles.length; i++) {
+      for (let j = 0; j < tiles[i].length; j++) {
+        this._renderer._scene.add(tiles[i][j]);
+      }
+    }
   }
 
   run() {}
