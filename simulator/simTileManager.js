@@ -1,5 +1,14 @@
 import * as THREE from "three";
 import { data } from "./simData";
+import {
+  TILE_TYPE,
+  FACILITY_TYPE,
+  ROAD_TYPE,
+  INIT_SETTING,
+  CAFE_TILE_TYPE,
+  FACILITY_TYPE_ORDER,
+} from "./simTileEnum";
+import { getRandomFloat, getRandomInt, getRandomNumbers } from "./util";
 
 export default class SimTileManager {
   constructor(numOfRow, numOfColumn) {
@@ -8,11 +17,15 @@ export default class SimTileManager {
 
     this._tiles = [];
     this._objects = [];
+
     SimTileManager.I = this;
 
     this.init();
   }
 
+  /**
+   * 타일 설정
+   */
   init() {
     const geometry = new THREE.BoxGeometry(...data.tileManager.tile.size);
     const material = new THREE.MeshBasicMaterial({
@@ -31,5 +44,17 @@ export default class SimTileManager {
         this._objects[this._tiles.length - 1].push(null);
       }
     }
+  }
+
+  getIndexOf(object) {
+    for (let i = 0; i < this._numOfRow; i++) {
+      for (let j = 0; j < this._numOfColumn; j++) {
+        if (this._tiles[i][j] == object || this._objects[i][j] == object) {
+          return [i, j];
+        }
+      }
+    }
+
+    return null;
   }
 }

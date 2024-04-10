@@ -2,9 +2,8 @@ import * as THREE from "three";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils.js";
 
 export default class SimObjectManager {
-  constructor(assetManager, tileManager) {
-    this._assetManager = assetManager;
-    this._tileManager = tileManager;
+  constructor(app) {
+    this._app = app;
     this._textureLoader = new THREE.TextureLoader();
   }
 
@@ -41,7 +40,13 @@ export default class SimObjectManager {
 
   setIcon() {}
 
-  addObject() {}
+  addObject(x, y, object) {
+    object.scale.set(0.7, 0.7, 0.7);
+    this._app._tileManager._objects[x][y] = object;
+    let pos = this._app._tileManager._tiles[x][y].position;
+    object.position.set(pos.x, pos.y + 0.5, pos.z);
+    this._app._renderer._scene.add(object);
+  }
 
   getObject() {}
 
