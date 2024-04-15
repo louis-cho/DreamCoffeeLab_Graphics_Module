@@ -29,6 +29,10 @@ data.renderer.background.color = 0x0aaaaa;
 data.objectManager = {};
 data.objectManager.brandId = 1;
 
+data.assetManager = {};
+data.assetManager.type = {};
+data.assetManager.variation = 1;
+
 data.tileManager = {};
 data.tileManager.tile = {};
 data.tileManager.tile.size = [0.92, 0.97, 0.92];

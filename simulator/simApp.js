@@ -8,6 +8,8 @@ import {
   flattenArray,
   getNormalizedDeviceCoordinates,
 } from "./util";
+import { data } from "./simData";
+import SimOverlayMenu from "./simOverlayMenu";
 
 // 시뮬레이션에 필요한 객체들을 관리한다.
 export class SimApp {
@@ -31,6 +33,8 @@ export class SimApp {
     this._raycaster = new THREE.Raycaster();
 
     SimApp.I = this;
+
+    this.setConstructionType("facility_bank");
     this.init();
   }
 
@@ -49,7 +53,7 @@ export class SimApp {
     // sound manager 로드하기
 
     // menu 로드하기
-
+    this._overlayMenu = new SimOverlayMenu(this._div);
     // request 설정
 
     this._div.addEventListener("pointerdown", SimApp.I.handleMouseDown);
@@ -63,8 +67,6 @@ export class SimApp {
       }
     }
   }
-
-  run() {}
 
   handleMouseDown(event) {
     event.preventDefault();
@@ -97,16 +99,27 @@ export class SimApp {
       if (object) {
         let location = SimApp.I._tileManager.getIndexOf(object);
         if (location) {
-          let newObject = SimApp.I._assetManager
-            .getModel("facility_bank_2")
-            .clone();
-          SimApp.I._objectManager.addObject(...location, newObject);
+          SimApp.I.addConstruction(location, SimApp.I._constructionType);
         }
       }
 
       console.log("Intersection point:", intersectionPoint);
     } else {
       console.log("Clicked at empty space");
+    }
+  }
+
+  setConstructionType(constructionType) {
+    this._constructionType = constructionType;
+  }
+
+  addConstruction(location, type) {
+    if (type != null) {
+      let newObject = this._assetManager
+        .getModel(type + "_" + data.assetManager.variation)
+        .clone();
+
+      this._objectManager.addObject(...location, newObject);
     }
   }
 }
